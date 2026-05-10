@@ -574,6 +574,42 @@ namespace grove {
         
         return RangeInInches;
     }
+
+    /**
+     * Create a new driver of Grove - Ultrasonic Sensor to measure distances in seconds
+     * @param pin signal pin of ultrasonic ranger module
+     */
+    //% blockId=grove_ultrasonic_seconds block="Ultrasonic Sensor (en sec) at|%pin"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.tooltips="false" pin.fieldOptions.width="250"
+    //% group="Ultrasonic" pin.defl=DigitalPin.P0
+
+    export function measureInSeconds(pin: DigitalPin): number
+    {
+        let duration = 0;
+        let RangeInSeconds = 0;
+        
+        pins.digitalWritePin(pin, 0);
+        control.waitMicros(2);
+        pins.digitalWritePin(pin, 1);
+        control.waitMicros(20);
+        pins.digitalWritePin(pin, 0);        
+        duration = pins.pulseIn(pin, PulseValue.High, 50000); // Max duration 50 ms
+
+        RangeInSeconds = duration * 1000000;
+               
+        if(RangeInSeconds > 0) distanceBackup = RangeInSeconds;
+        else RangeInSeconds = distanceBackup;
+
+        basic.pause(50);
+        
+        return RangeInSeconds;
+    }
+
+
+
+
+
     
     /**
      * Create a new driver Grove - 4-Digit Display
