@@ -227,7 +227,7 @@ namespace grove {
             pins.digitalWritePin(this.clkPin, 1);
             pins.digitalWritePin(this.dataPin, 1);
             pins.digitalWritePin(this.dataPin, 0);
-            pins.digitalWritePin(this.clkPin, 0);
+            pins.digitalWritePin(this.clkPin, 0);    
         }
         
         private stop()
@@ -579,7 +579,7 @@ namespace grove {
      * Create a new driver of Grove - Ultrasonic Sensor to measure distances in seconds
      * @param pin signal pin of ultrasonic ranger module
      */
-    //% blockId=grove_ultrasonic_seconds block="Ultrasonic Sensor (en sec) at|%pin"
+    //% blockId=grove_ultrasonic_seconds block="Ultrasonic Sensor (en sec) sur|%pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.tooltips="false" pin.fieldOptions.width="250"
     //% group="Ultrasonic" pin.defl=DigitalPin.P0
@@ -596,7 +596,7 @@ namespace grove {
         pins.digitalWritePin(pin, 0);        
         duration = pins.pulseIn(pin, PulseValue.High, 50000); // Max duration 50 ms
 
-        RangeInSeconds = duration * 1000000;
+        RangeInSeconds = duration / 1000000;
                
         if(RangeInSeconds > 0) distanceBackup = RangeInSeconds;
         else RangeInSeconds = distanceBackup;
